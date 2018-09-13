@@ -11,6 +11,12 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+
+
 
 # Returns GEOJSON response for requested address and vehicle
 # Since we don't want to wait until all flats are processed there is a numbering scheme used.

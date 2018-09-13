@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/base.css') }}">
+
+
+
+
+
+
+    <style>
+        .material-icons.md-18 {
+            font-size: 18px;
+        }
+
+        .material-icons.md-24 {
+            font-size: 24px;
+        }
+
+        /* Default */
+        .material-icons.md-36 {
+            font-size: 36px;
+        }
+
+        .material-icons.md-48 {
+            font-size: 48px;
+        }
+    </style>
+</head>
+
+<body id="bootstrap-overrides">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a href="/" class="navbar-brand" href="#">WG Connections</a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a href="/"  class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a href="/about" class="nav-link" href="#">About</a>
+                </li>
+    </nav>
+
+    <div class="container">
+      <div class="mt-3">
+        <h1>WG-connections</h1>
+      </div>
+      <p class="lead">This is a demo page for the <a href="https://github.com/Beriefing/wg-connections">WG-connections</a> GitHub project.</p>
+      <p class="lead"> The project consists of 3 different parts: Scraper, Server and Router.</p>
+
+      <div class="row">
+        <div class="col-md-1 col-lg-1">
+          <p>Scraper:</p>
+        </div>
+        <div class="col-md-11">
+          <p>The scraper uses Selenium, BeautifulSoup and a rotating-proxy service to scrape data from a certain big German flatsharing website. Currently only data for Berlin is scraped. </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-1 col-lg-1">
+          <p>Server:</p>
+        </div>
+        <div class="col-md-11">
+          <p>The server is based on Flask and uses a Leaflet map to draw the geojson elements returned from a running GraphHopper instance. </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-1 col-lg-1">
+          <p>Router:</p>
+        </div>
+        <div class="col-md-11">
+          <p>There need to be a couple of running (selfhosted) GraphHopper instances with map and GTFS data from Berlin. The setup is as easy as shown in the examples on their <a href="https://github.com/graphhopper/graphhopper">project page</a>.</p>
+          Graphhopper Instances:
+          <ol>
+          <li>Public Transit (very RAM-intensive), Port: 8993</li>
+          <li>Car, Bike, Walk share one instance, Port: 8989</li>
+          <li>Isochrones (for Car, Bike + Walk), Port: 8991</li>
+        </div>
+      </div>
+      <div class="row">
+      </div>
+      <div class="row" style="margin-top:30px;">
+        <div class="col-md-1 col-lg-1">
+          <p class = "lead">Contact:</p>
+        </div>
+        <div class="col-md-11">
+          <p class="lead">Felix Berief <br> berief@kth.se</p>
+        </div>
+      </div>
+
+
+
+
+
+
+    </div>
+
+
+    </div>
+  </body>
+
+  </html>
