@@ -1,0 +1,6 @@
+*.log
+*.pbf
+*.pyc
+*.zip
+*.txt
+config.py

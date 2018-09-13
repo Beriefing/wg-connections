@@ -1,0 +1,37 @@
+
+html body#bootstrap-overrides div.container-fluid{
+  text-align: center;
+}
+
+button.close{
+  color:red;
+  font-size: 2rem;
+  padding-top: 0.4em;
+}
+
+div.col-12.col-sm-12.col-md-12.col-xl-5{
+  padding-right: 5px;
+}
+div.col-4.col-sm-4.col-md-5.col-xl-2 ,div.col-6.col-sm-5.col-md-5.col-xl-4{
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+div.col-2.col-sm-3.col-md-2.col-xl-1.my-auto{
+  padding-left: 5px;
+}
+html body#bootstrap-overrides div.container-fluid div.row div.col-md-3 div.row{
+  padding-bottom: 1em;
+
+}
+
+html body#bootstrap-overrides div.container-fluid div.row div.col-md-3 div.row div.col-12.col-sm-12{
+  padding-right: 0;
+  text-align: left;
+}
+
+#mapid { height: 92vh; }
+
+.in{
+opacity: .9;
+}

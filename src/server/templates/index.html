@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" />
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/base.css') }}">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">    </script>
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js" integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q==" crossorigin="">    </script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.2.0/bootstrap-slider.min.js">    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.2.0/css/bootstrap-slider.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+
+    <style>
+        .material-icons.md-18 {
+            font-size: 18px;
+        }
+
+        .material-icons.md-24 {
+            font-size: 24px;
+        }
+
+        /* Default */
+        .material-icons.md-36 {
+            font-size: 36px;
+        }
+
+        .material-icons.md-48 {
+            font-size: 48px;
+        }
+    </style>
+</head>
+
+<body id="bootstrap-overrides">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">WG Connections</a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-0 col-sm-0 col-md-3 col-xl-3">
+                    </div>
+                    <div class="col-9 col-sm-8 col-md-6 col-xl-6">
+                        <div class="form-group">
+                            <label for="city_select">City</label>
+                            <select class="form-control form-control-sm" id="city_select">
+                                <option>Berlin</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-3 col-sm-4 col-md-3 col-xl-3" style="text-align:right;padding-right:0;">
+                        <i class="material-icons md-36" onclick="hide_sidebar()" style="cursor: pointer">menu</i>
+                    </div>
+
+
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h6>Enter your personal POIs and the Transport Mode</h6>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-xl-5">
+
+                        <label for="Street">Street, Nr</label>
+                        <input type="text" class="form-control form-control-sm" id="street_form" placeholder="Musterstraße 123">
+
+                    </div>
+
+                    <div class="col-4 col-sm-4 col-md-5 col-xl-2">
+
+                        <label for="Zip">ZIP</label>
+                        <input type="text" class="form-control form-control-sm" id="zip_form" placeholder="12345">
+                    </div>
+                    <div class="col-6 col-sm-5 col-md-5 col-xl-4">
+                        <div class="form-group">
+                            <label for="Transport">Transport</label>
+                            <select class="form-control form-control-sm" id="transport_select">
+                                <option>Public Transport</option>
+                                <option>Car</option>
+                                <option>Bike</option>
+                                <option>Walk</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-1  col-xl-1">
+                    </div>
+                    <div class="col-4 col-sm-12 col-xl-4">
+                        <button type="button" id ="show_isos" class="btn btn-success " onclick="isochrones_click()" disabled><span> Show Isochrones! </span><i id="isochrones_icon" class="fa"></i> </button>
+                    </div>
+                    <div class="col-2  col-xl-2">
+                    </div>
+                    <div class="col-4 col-sm-12 col-xl-4">
+                        <button type="button" id ="show_wgs" class="btn btn-success" onclick="go_click()"><span>Show 50 WGs! </span><i id="wgs_icon" class="fa"></i></button>
+                    </div>
+                    <div class="col-1 col-md-0  col-xl-1">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-xl-3" style="">
+                        Filter by Rent:
+                    </div>
+                    <div class="col-12 col-sm-12 col-xl-9" style="padding:0" >
+                        <b id = "rent_min" >€ 100</b> <input id="rent_slider" type="text" class="span2" value="" data-slider-min="1" data-slider-max="2000" data-slider-step="10" data-slider-value="[100,1000]" /> <b id = "rent_max" style="padding-left: 0.75em;">€ 1000</b>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-xl-4" >
+                        Filter by Gender:
+                    </div>
+                    <div class="col-12 col-sm-12 col-xl-8" style="padding:0">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="check_M" checked="M" checked>
+                            <label class="form-check-label" for="inlineCheckbox1">M</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="check_W" value="option2" checked="W" checked>
+                            <label class="form-check-label" for="inlineCheckbox2">W</label>
+                        </div>
+                    </div>
+                </div>
+                  <div class="row">
+                      <div class="col-12 col-sm-12 col-xl-4" >
+                          Filter by Type:
+                      </div>
+
+                      <div class="col-12 col-sm-12 col-xl-8" style="padding:0">
+                          <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="checkbox" id="check_Flat" checked="F" checked>
+                              <label class="form-check-label" for="inlineCheckbox1">Flat</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="checkbox" id="check_WG"  checked="W" checked>
+                              <label class="form-check-label" for="inlineCheckbox2">WG</label>
+                          </div>
+                      </div>
+                </div>
+
+            </div>
+            <div class="col-xs-12 col-md-9">
+                <div id="mapid"></div>
+            </div>
+        </div>
+<script type="text/javascript" src="{{ url_for('static', filename='connections.js') }}"></script>
+</body>
+
+</html>
