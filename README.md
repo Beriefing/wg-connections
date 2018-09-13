@@ -8,7 +8,7 @@ The scraper uses Selenium, BeautifulSoup and a rotating-proxy service to scrape 
 The server is based on Flask and uses a Leaflet map to draw the geojson elements returned from a running GraphHopper instance.
 
 ## GraphHopper  
-There need to be a couple of running (selfhosted) GraphHopper instances with map and GTFS data from Berlin. The setup is as easy as shown in the examples on their [project page](https://github.com/graphhopper/graphhopper).
+There need to be a couple of running (selfhosted) GraphHopper instances with map and GTFS data from Berlin. The setup is as easy as shown in the examples on their [project page](https://github.com/graphhopper/graphhopper).  
 Graphhopper Instances:
 1. Public Transit (very RAM-intensive)
 2. Car, Bike, Walk share one instance
