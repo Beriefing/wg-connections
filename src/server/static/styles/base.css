@@ -25,7 +25,7 @@ html body#bootstrap-overrides div.container-fluid div.row div.col-md-3 div.row{
 
 }
 
-html body#bootstrap-overrides div.container-fluid div.row div.col-md-3 div.row div.col-12.col-sm-12{
+html body#bootstrap-overrides div.filter div.row div.col-12.col-sm-12{
   padding-right: 0;
   text-align: left;
 }

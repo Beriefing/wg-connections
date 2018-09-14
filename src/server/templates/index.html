@@ -81,7 +81,7 @@
 
                 </div>
                 <div class="row">
-                    <div class="col-12 col-sm-12 col-md-12 col-xl-5">
+                    <div class="col-12 col-sm-12 col-md-12 col-xl-6" style="text-align:none;">
 
                         <label for="Street">Street, Nr</label>
                         <input type="text" class="form-control form-control-sm" id="street_form" placeholder="Musterstraße 123">
@@ -106,6 +106,7 @@
                     </div>
 
                 </div>
+
                 <div class="row">
                     <div class="col-1  col-xl-1">
                     </div>
@@ -120,13 +121,13 @@
                     <div class="col-1 col-md-0  col-xl-1">
                     </div>
                 </div>
-
+                <div class="filter">
                 <div class="row">
                     <div class="col-12 col-sm-12 col-xl-3" style="">
                         Filter by Rent:
                     </div>
-                    <div class="col-12 col-sm-12 col-xl-9" style="padding:0" >
-                        <b id = "rent_min" >€ 100</b> <input id="rent_slider" type="text" class="span2" value="" data-slider-min="1" data-slider-max="2000" data-slider-step="10" data-slider-value="[100,1000]" /> <b id = "rent_max" style="padding-left: 0.75em;">€ 1000</b>
+                    <div class="col-12 col-sm-12 col-xl-9" >
+                        <b id = "rent_min" style="padding-right:0.5em" >€ 100</b> <input id="rent_slider" type="text" class="span2" value="" data-slider-min="1" data-slider-max="2000" data-slider-step="10" data-slider-value="[100,1000]" /> <b id = "rent_max" style="padding-left: 0.75em;">€ 1000</b>
                     </div>
                 </div>
 
@@ -134,12 +135,12 @@
                     <div class="col-12 col-sm-12 col-xl-4" >
                         Filter by Gender:
                     </div>
-                    <div class="col-12 col-sm-12 col-xl-8" style="padding:0">
+                    <div class="col-12 col-sm-12 col-xl-8">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="check_M" checked="M" checked>
                             <label class="form-check-label" for="inlineCheckbox1">M</label>
                         </div>
-                        <div class="form-check form-check-inline">
+                        <div class="form-check form-check-inline" style="margin-left:0.8em">
                             <input class="form-check-input" type="checkbox" id="check_W" value="option2" checked="W" checked>
                             <label class="form-check-label" for="inlineCheckbox2">W</label>
                         </div>
@@ -150,7 +151,7 @@
                           Filter by Type:
                       </div>
 
-                      <div class="col-12 col-sm-12 col-xl-8" style="padding:0">
+                      <div class="col-12 col-sm-12 col-xl-8" >
                           <div class="form-check form-check-inline">
                               <input class="form-check-input" type="checkbox" id="check_Flat" checked="F" checked>
                               <label class="form-check-label" for="inlineCheckbox1">Flat</label>
@@ -161,6 +162,8 @@
                           </div>
                       </div>
                 </div>
+              </div>
+
 
             </div>
             <div class="col-xs-12 col-md-9">
