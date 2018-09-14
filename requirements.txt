@@ -14,6 +14,7 @@ PyVirtualDisplay==0.2.1
 requests==2.19.1
 selenium==3.14.0
 urllib3==1.23
+uWSGI==2.0.17.1
 Werkzeug==0.14.1
 yarg==0.1.9
 

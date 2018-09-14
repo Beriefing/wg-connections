@@ -5,6 +5,7 @@ from flask import Flask, render_template, request, jsonify, session
 from server_helper import *
 import config
 app = Flask(__name__)
+app.config['SECRET_KEY'] = config.config['APP_SECRET']
 
 
 @app.route('/')
@@ -70,5 +71,4 @@ def isochrones():
                    time_limit))
 
 if __name__ == '__main__':
-    app.config['SECRET_KEY'] = config.config['APP_SECRET']
     app.run(debug=False, host='0.0.0.0')
