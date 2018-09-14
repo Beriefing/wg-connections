@@ -58,20 +58,36 @@ $('#check_WG').change(function() {
 })
 
 $('#transport_select').change(function() {
-		nr_shown = 0
-    json_response = []
-    $("#show_wgs").find('span').text('Show WGs!')
-    $('#show_wgs').attr('class', 'btn btn-success')
-    markerGroup.clearLayers()
-    isochroneGroup.clearLayers()
 
-    if ($("select#transport_select").val() == "Public Transport") {
-        document.getElementById("show_isos").disabled = true
-    } else {
-        document.getElementById("show_isos").disabled = false
-    }
-
+	reset_all();
 })
+
+$('#street_form').change(function() {
+
+	reset_all();
+})
+$('#zip_form').change(function() {
+
+	reset_all();
+})
+
+
+
+function reset_all(){
+
+	nr_shown = 0
+	json_response = []
+	$("#show_wgs").find('span').text('Show WGs!')
+	$('#show_wgs').attr('class', 'btn btn-success')
+	markerGroup.clearLayers()
+	isochroneGroup.clearLayers()
+
+	if ($("select#transport_select").val() == "Public Transport") {
+			document.getElementById("show_isos").disabled = true
+	} else {
+			document.getElementById("show_isos").disabled = false
+	}
+}
 
 
 function rent_gender_Filter(feature) {
@@ -167,13 +183,40 @@ function isochrones_click() {
 }
 
 function go_click() {
-    $("#wgs_icon").toggleClass("fa-circle-o-notch fa-spin")
-    $("#show_wgs").find('span').text('Loading... ')
-    $("#show_wgs").prop('disabled', true)
+
 
     var city = $("select#city_select").val()
     var address = $("#street_form").val()
     var zip = $("#zip_form").val()
+		var update = $.ajax({
+				type: "POST",
+				url: "/update_poi",
+				dataType: "json",
+				contentType: 'application/json',
+				data: JSON.stringify({
+						"city": city,
+						"address": address,
+						"zip": zip,
+				}),
+				success: function(response) {
+					console.log(response)
+					if (response["poi"]=="found")
+					{
+						$("#wgs_icon").toggleClass("fa-circle-o-notch fa-spin")
+						$("#show_wgs").find('span').text('Loading... ')
+						$("#show_wgs").prop('disabled', true)
+						request_offers()
+					}
+					else{
+						alert("Address not found!");
+					}
+				}
+		})
+}
+
+
+function request_offers(){
+		var city = $("select#city_select").val()
     var transport = $("select#transport_select").val()
     var requests = [ ];
     for (var idx = 0; idx < 10; idx++) {
@@ -184,8 +227,6 @@ function go_click() {
             contentType: 'application/json',
             data: JSON.stringify({
                 "city": city,
-                "address": address,
-                "zip": zip,
                 "transport": transport,
                 "idx": idx,
                 "nr_shown": json_response.length
@@ -208,12 +249,12 @@ function go_click() {
         })
       )
     }
-    $.when.apply( null, requests ).done(function() {
-      $("#wgs_icon").toggleClass("fa-circle-o-notch fa-spin")
-      $("#show_wgs").find('span').text('Show More!')
-      $("#show_wgs").prop('disabled', false)
-      $('#show_wgs').attr('class', 'btn btn-primary')
-});
+    	$.when.apply( null, requests ).done(function() {
+	      $("#wgs_icon").toggleClass("fa-circle-o-notch fa-spin")
+	      $("#show_wgs").find('span').text('Show More!')
+	      $("#show_wgs").prop('disabled', false)
+	      $('#show_wgs').attr('class', 'btn btn-primary')
+			});
 }
 
 

@@ -17,30 +17,41 @@ def about():
     return render_template('about.html')
 
 
-
+@app.route('/update_poi',methods=['POST'])
+def update():
+    print ("Start")
+    (address, city) = ([request.json['address'], request.json['zip']],
+                       request.json['city'])
+    session['city'] = city
+    (lat, lon) = get_coords_from_address(address, city)
+    logger("Done")
+    if lat == 0 and lon == 0:
+        logger("Error")
+        return jsonify({"poi":"not_found"})
+    else:
+        session['lat'] = lat
+        session['lon'] = lon
+        return jsonify({"poi":"found"})
 
 # Returns GEOJSON response for requested address and vehicle
 # Since we don't want to wait until all flats are processed there is a numbering scheme used.
 
 @app.route('/wgs.json', methods=['POST'])
 def wgs():
-    (address, city) = ([request.json['address'], request.json['zip']],
-                       request.json['city'])
+
     idx = request.json['idx']   #The entire number of 50 needed flats is split up into parts of 5 flats at a time with the index ranging from 0 to 9
     logger("IDX: "+str(idx))
     nr_shown = max(int(request.json['nr_shown']) - 1, 0)  # This is the current number of shown flats. The POI is subtracted from the total number
     logger("NR SHOWN: "+str(nr_shown))
     # To avoid duplicate geocoding API calls, we store the GPS coords as a session cookie
 
-    if (idx == 0 and nr_shown == 0):
-        (lat, lon) = get_coords_from_address(address, city)
-        if lat == 0 and lon == 0:
-            logger("Error")
-        session['lat'] = lat
-        session['lon'] = lon
-    else:
-        lat = session['lat']
-        lon = session['lon']
+
+    lat = session['lat']
+    lon = session['lon']
+    city = session['city']
+
+
+
     return jsonify(create_dist_geojson([(lat, lon,
                    request.json['transport'])], city, idx, nr_shown))
 
@@ -54,7 +65,8 @@ def isochrones():
                                 request.json['city'],
                                 request.json['transport'])
 
-
+    lat = session.get("lat",-1)
+    lon = session.get("lon",-1)
     if lat == -1 and lon == -1:
         (lat, lon) = get_coords_from_address(address, city)
         if lat == 0 and lon == 0:
