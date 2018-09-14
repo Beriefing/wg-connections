@@ -53,7 +53,7 @@ def get_website(url, params={}, proxies={}):
 # Retrieves the GPS coords of a given address
 
 def get_coords_from_address(address, city):
-    logger(address)
+    logger("ADDRESS: "+str(address))
     if len(address) <= 2:  # If address only contains the street and the postcode, append the city (can happen if parses messes up )
         address += city
 
