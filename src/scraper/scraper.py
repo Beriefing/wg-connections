@@ -9,6 +9,10 @@ import config
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from scraper_helper import *
+from pyvirtualdisplay import Display
+
+display = Display(visible=0, size=(1280, 800))
+display.start()
 
 
 # Retrieve all subpages to scrape, respective city and apartment type
