@@ -58,8 +58,9 @@ $('#check_WG').change(function() {
 })
 
 $('#transport_select').change(function() {
+		nr_shown = 0
     json_response = []
-    $("#show_wgs").find('span').text('Show 50 WGs!')
+    $("#show_wgs").find('span').text('Show WGs!')
     $('#show_wgs').attr('class', 'btn btn-success')
     markerGroup.clearLayers()
     isochroneGroup.clearLayers()
@@ -209,7 +210,7 @@ function go_click() {
     }
     $.when.apply( null, requests ).done(function() {
       $("#wgs_icon").toggleClass("fa-circle-o-notch fa-spin")
-      $("#show_wgs").find('span').text('Show 50 More!')
+      $("#show_wgs").find('span').text('Show More!')
       $("#show_wgs").prop('disabled', false)
       $('#show_wgs').attr('class', 'btn btn-primary')
 });
