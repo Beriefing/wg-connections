@@ -71,4 +71,4 @@ def isochrones():
 
 if __name__ == '__main__':
     app.config['SECRET_KEY'] = config.config['APP_SECRET']
-    app.run(debug=True)
+    app.run(debug=False, host='0.0.0.0')
