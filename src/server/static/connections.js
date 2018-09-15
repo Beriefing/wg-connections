@@ -274,7 +274,7 @@ function show_sidebar() {
 
 function onEachFeature(feature, layer) {
     if (feature.properties && feature.properties.poi == "false") {
-        layer.bindPopup('<p><a href="' + feature.properties.link + '">Link to wg-gesucht.de </a><br/>Type: ' + feature.properties.type + '<br/>Rent: €' + feature.properties.rent + "<br/>Wanted Gender: " + feature.properties.gender + "<br/>Duration: Approx. " + feature.properties.duration_0 + " Min</p>");
+        layer.bindPopup('<p><a target="_blank" href="' + feature.properties.link + '">Link to wg-gesucht.de </a><br/>Type: ' + feature.properties.type + '<br/>Rent: €' + feature.properties.rent + "<br/>Wanted Gender: " + feature.properties.gender + "<br/>Duration: Approx. " + feature.properties.duration_0 + " Min</p>");
     } else {
         layer.bindPopup("<p>POI</p>")
     }
