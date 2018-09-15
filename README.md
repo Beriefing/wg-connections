@@ -1,5 +1,6 @@
 # wg-connections
 Search flats and flatshares by commuting distance (currently only in Berlin).
+[DEMO](https://wg-connections.de).
 
 ## Scraper  
 The scraper uses Selenium, BeautifulSoup and a rotating-proxy service to scrape data from a certain big German flatsharing website. The scraped data is inserted into a MySQL database. Currently only data for Berlin is scraped.
