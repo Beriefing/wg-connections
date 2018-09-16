@@ -60,8 +60,10 @@ def get_proxy(proxy_count, target_datetime):
     while True:
         proxy_count += 1
         if proxy_count >= 240:  # Check if proxy count is reached
+            logger ("Reached proxy limit. Sleeping until "+str(target_datetime))
             while datetime.datetime.now() < target_datetime:  # Wait until next day
                 time.sleep(600)
+            proxy_count = 0
         json_response = \
             json.loads(get_website('https://gimmeproxy.com/api/getProxy'
                        , params=params))  # Get new proxy via API + API KEY

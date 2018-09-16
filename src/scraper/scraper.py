@@ -24,22 +24,24 @@ i = 0
 proxy_count = 0  # Counts the number of API calls to gimmeproxy (Max. 240 per day)
 time_start = 0  # Makes sure, the first abs(time_stop - time_start) is bigger than 300
 
+target_datetime = \
+    datetime.datetime.combine(datetime.datetime.now().date()
+                              + datetime.timedelta(days=1),
+                              datetime.time(0))
+logger("Target Datetime: " + str(target_datetime))
 while True:
     city = wg_gesucht_websites[i][0]
     website = wg_gesucht_websites[i][1]
     type_flat = wg_gesucht_websites[i][2]
 
 # This resets the proxy counter once a new day has begun
-
-    target_datetime = \
-        datetime.datetime.combine(datetime.datetime.now().date()
-                                  + datetime.timedelta(days=1),
-                                  datetime.time(0))
     if datetime.datetime.now() > target_datetime:
         proxy_count = 0
         target_datetime = \
             datetime.datetime.combine(datetime.datetime.now().date()
                 + datetime.timedelta(days=1), datetime.time(0))
+        logger("Target Datetime: " + str(target_datetime))
+
         remove_old_data()
 
 # Less activity during the night

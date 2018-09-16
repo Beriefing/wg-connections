@@ -1,5 +1,5 @@
 var nr_shown = 0
-var json_response = ""
+var json_response = []
 var map = L.map('mapid').setView([52.520008, 13.404954], 13);
 var markerGroup = L.layerGroup()
 var isochroneGroup = L.layerGroup()
@@ -94,7 +94,6 @@ $('#zip_form').change(function() {
 
 
 function reset_all(){
-
 	nr_shown = 0
 	json_response = []
 	$("#show_wgs").find('span').text('Show WGs!')
@@ -219,7 +218,6 @@ function go_click() {
 						"zip": zip,
 				}),
 				success: function(response) {
-					console.log(response)
 					if (response["poi"]=="found")
 					{
 						$("#wgs_icon").toggleClass("fa-circle-o-notch fa-spin")
