@@ -238,9 +238,10 @@ def remove_old_data():
                                   - datetime.timedelta(days=10),
                                   datetime.time(0))
     try:
-        cursor.execute("""DELETE FROM wgs WHERE datetime_add=%s """,
+        cursor.execute("""DELETE FROM wgs WHERE datetime_add<%s """,
                        (ten_days_ago, ))
         db.commit()
+        logger("REMOVED OLD DATA")
         return True
     except Exception as e:
         logger(e, True)
