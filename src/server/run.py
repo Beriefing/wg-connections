@@ -10,21 +10,24 @@ app.config['SECRET_KEY'] = config.config['APP_SECRET']
 
 @app.route('/')
 def index():
+    client_ip = request.access_route[0]
+    logger ("HOME Client IP: "+str(client_ip))
     return render_template('index.html')
 
 @app.route('/about')
 def about():
+    logger ("ABOUT Client IP: "+str(client_ip))
     return render_template('about.html')
 
 
 @app.route('/update_poi',methods=['POST'])
 def update():
-    print ("Start")
+
     (address, city) = ([request.json['address'], request.json['zip']],
                        request.json['city'])
     session['city'] = city
     (lat, lon) = get_coords_from_address(address, city)
-    logger("Done")
+
     if lat == 0 and lon == 0:
         logger("Error")
         return jsonify({"poi":"not_found"})
@@ -40,9 +43,9 @@ def update():
 def wgs():
 
     idx = request.json['idx']   #The entire number of 50 needed flats is split up into parts of 5 flats at a time with the index ranging from 0 to 9
-    logger("IDX: "+str(idx))
+
     nr_shown = max(int(request.json['nr_shown']) - 1, 0)  # This is the current number of shown flats. The POI is subtracted from the total number
-    logger("NR SHOWN: "+str(nr_shown))
+
     # To avoid duplicate geocoding API calls, we store the GPS coords as a session cookie
 
 
