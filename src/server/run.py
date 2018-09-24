@@ -16,6 +16,7 @@ def index():
 
 @app.route('/about')
 def about():
+    client_ip = request.access_route[0]
     logger ("ABOUT Client IP: "+str(client_ip))
     return render_template('about.html')
 
