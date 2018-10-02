@@ -41,8 +41,8 @@ while True:
             datetime.datetime.combine(datetime.datetime.now().date()
                 + datetime.timedelta(days=1), datetime.time(0))
         logger("Target Datetime: " + str(target_datetime))
+    remove_old_data()
 
-        remove_old_data()
 
 # Less activity during the night
 
